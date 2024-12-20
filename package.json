@@ -1,0 +1,15 @@
+{
+  "name": "@allnulled/litestarter",
+  "version": "1.0.0",
+  "description": "Starter for HTML5 + Vue.js (v2) + Win7.css + Importer",
+  "main": "starter/index.html",
+  "bin": {
+    "litestarter": "litestarter.bin.js"
+  },
+  "scripts": {
+    "test": "npx http-server -c-1 starter -o"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

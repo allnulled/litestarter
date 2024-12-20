@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Litestarter</title>
+    <script src="src/ext/importer.js"></script>
+</head>
+<body>
+    <h3>Litestarter</h3>
+    <h5>Vue.js (v2) + Win7.css + Reloader</h5>
+    <script>
+
+        const main = async function() {
+            try {
+                await Importer.scriptSrc("src/ext/socket.io-client.js");
+                await Importer.scriptSrc("src/ext/vue-v2.js");
+                await Importer.scriptSrc("src/ext/refresher.js");
+                await Importer.linkStylesheet("src/ext/win7.css");
+            } catch (error) {
+                console.log(error);
+                throw error;
+            }
+        };
+
+        window.addEventListener("load", main);
+
+    </script>
+</body>
+</html>
