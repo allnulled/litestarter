@@ -18,13 +18,18 @@ litestarter .
 
 To serve the static files do:
 
-```
+```sh
 sh serve.sh
 ```
 
 To reload automatically on changes do:
 
-```
+```sh
 node reloader.js
 ```
 
+You can create new components simply with:
+
+```sh
+node create-component.js
+```

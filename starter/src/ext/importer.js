@@ -25,8 +25,9 @@ const Importer = class {
     const response = await fetch(url);
     if (!response.ok) throw new Error(`Failed to fetch script: ${url}`);
     const scriptText = await response.text();
+    const AsyncFunction = (async function() {}).constructor;
     const asyncFunction = new AsyncFunction(...Object.keys(context), scriptText);
-    return asyncFunction(...Object.values(context));
+    return await asyncFunction(...Object.values(context));
   }
 
   static async linkStylesheet(href) {
@@ -45,6 +46,20 @@ const Importer = class {
     const response = await fetch(url);
     if (!response.ok) throw new Error(`Failed to fetch text: ${url}`);
     return response.text();
+  }
+
+  static async importVueComponent(url) {
+    try {
+      const urlJs = url + ".js";
+      const urlCss = url + ".css";
+      const urlHtml = url + ".html";
+      const template = await this.text(urlHtml);
+      await this.scriptAsync(urlJs, { $template: template });
+      await this.linkStylesheet(urlCss);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
   
 }

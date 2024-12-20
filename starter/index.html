@@ -7,16 +7,33 @@
     <script src="src/ext/importer.js"></script>
 </head>
 <body>
-    <h3>Litestarter</h3>
-    <h5>Vue.js (v2) + Win7.css + Reloader</h5>
+    
+    <div id="app"></div>
     <script>
 
         const main = async function() {
             try {
-                await Importer.scriptSrc("src/ext/socket.io-client.js");
-                await Importer.scriptSrc("src/ext/vue-v2.js");
-                await Importer.scriptSrc("src/ext/refresher.js");
-                await Importer.linkStylesheet("src/ext/win7.css");
+
+                Import_scripts: {
+                    await Importer.scriptSrc("src/ext/socket.io-client.js");
+                    await Importer.scriptSrc("src/ext/vue-v2.js");
+                    await Importer.scriptSrc("src/ext/refresher.js");
+                    await Importer.linkStylesheet("src/ext/win7.css");
+                    await Importer.importVueComponent("src/components/c-title/c-title");
+                    await Importer.importVueComponent("src/components/home-page/home-page");
+                    await Importer.importVueComponent("src/components/app/app");
+                }
+
+                Create_app: {
+                    console.log("Deplyoing app");
+                    Vue.prototype.$window = window;
+                    Vue.prototype.$importer = Importer;
+                    Vue.prototype.$socketio = io;
+                    const app = new Vue({
+                        render: h => h(Vue.options.components.app),
+                    }).$mount("#app");
+                }
+
             } catch (error) {
                 console.log(error);
                 throw error;
